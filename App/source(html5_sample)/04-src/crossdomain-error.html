@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><body>
+<script type="text/javascript">
+  // xhrのテスト
+  var url = "http://google.com";
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        alert("ok!" + xhr.responseText);
+      } else {
+        alert("Error!");
+      }
+    }
+  };
+  xhr.send('');
+</script>
+</body></html>
+

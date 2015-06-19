@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+</head><body><h1 id="msg"></h1>
+<script type="text/javascript">
+// サーバーと接続           ---(*1)
+var es = new EventSource("sse-stream.php");
+// 受信したメッセージを表示   ---(*2)
+es.onmessage = function (e) {
+  var s = document.getElementById('msg');
+  s.innerHTML = e.data; 
+};
+</script>
+</body></html>
+

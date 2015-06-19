@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=320">
+  <title>Clock</title>
+</head><body>
+<div id="clock"></div>
+<div id="info"></div>
+<script type="text/javascript">
+// ワーカーを作成 ---(*1)
+var w = new Worker("worker-clock-task.js");
+// ワーカーを開始 --- (*2)
+w.postMessage(null);
+// メッセージを受信したとき ---(*3)
+w.onmessage = function(e) {
+  var data = e.data;
+  var disp = data.disp;
+  // メッセージの種類で処理を分岐 ---(*4)
+  switch (data.mode) {
+    case "clock":
+      $("clock").innerHTML = disp;
+      break;
+    case "info":
+      $("info").innerHTML = disp;
+      break;
+  } 
+};
+function $(id) {
+  return document.getElementById(id);
+}
+</script></body></html>
+

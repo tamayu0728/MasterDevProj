@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+</head><body>
+  <ul>
+    <li>---</li>
+    <li>---</li>
+    <li>---</li>
+    <li>---</li>
+    <li>---</li>
+  </ul>
+  <button onclick="change()">乱数発生</button>
+  <script type="text/javascript">
+  function change() {
+    var items = document.getElementsByTagName("li");
+    for (var i in items) {
+      var li = items[i];
+      li.innerHTML = Math.random();
+    }
+  }
+  </script>
+</body></html>
+
+

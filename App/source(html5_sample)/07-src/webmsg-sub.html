@@ -1,0 +1,16 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=320">
+<style> body { background-color: #fff0ff; } </style>
+<script type="text/javascript">
+  // 受信したメッセージを画面に表示
+  window.onmessage = function (e) {
+    var txt = document.getElementById("info");
+    txt.value = e.data;
+  };
+</script>
+</head><body>
+  <h2>サブページ</h2>
+  <textarea id="info" cols="40" rows="5"></textarea>
+</body></html>
+

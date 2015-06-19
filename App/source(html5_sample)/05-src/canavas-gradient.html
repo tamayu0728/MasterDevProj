@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body>
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  var canvas = document.getElementById("a_canvas");
+  var ctx = canvas.getContext("2d");
+  // グラデーションの作成
+  var g = ctx.createLinearGradient(0,0,300,0);
+  g.addColorStop(0, "rgb(255,0,0)");   // 赤
+  g.addColorStop(1, "rgb(255,255,0)"); // 黄
+  ctx.fillStyle = g;
+  // 矩形を描画
+  ctx.fillRect(20,20,260,260);
+</script>
+</body></html>
+

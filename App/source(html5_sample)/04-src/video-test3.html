@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+</head><body>
+  <h3>HTML5動画再生</h3>
+  <video id="a_video" poster="video-thumb.jpg">
+    <source src="test.mp4" />
+    <source src="test.webm" />
+  </video>
+  <div>
+    <input id="play_btn"  type="button" value="再生" />
+    <input id="pause_btn" type="button" value="一時停止" />
+    <input id="time_btn" type="button" value="途中から" />
+  </div>
+  <div id="info"></div>
+  <script type="text/javascript">
+    function $ (id) { return document.getElementById(id); }
+    var a_video = $("a_video");
+    a_video.addEventListener("timeupdate", function() {
+      $("info").innerHTML = a_video.currentTime + "/" +
+                            a_video.duration;
+    });
+    $("play_btn").onclick = function() {
+      a_video.play();
+    }
+    $("pause_btn").onclick = function(){
+      a_video.pause();
+    }
+    $("time_btn").onclick = function(){
+      a_video.currentTime = 2.9; // 適当な場所から
+      a_video.play();
+    }
+  </script>
+</body></html>

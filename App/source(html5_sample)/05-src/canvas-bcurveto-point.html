@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=320">
+</head><body>
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  var canvas = document.getElementById("a_canvas");
+  var ctx = canvas.getContext("2d");
+  // --- 背景を塗りつぶす
+  ctx.fillStyle   = "#f0f0f0";
+  ctx.fillRect(0,0,300,300);
+  //
+  // 制御線の描画
+  ctx.strokeStyle = "#ff00ff";
+  ctx.lineWidth = 2;
+  line(10, 10, 50, 290);
+  line(290,10, 250, 290);
+  //
+  // --- 円弧を描く
+  // パスの指定
+  ctx.beginPath();
+  ctx.moveTo(10, 10);
+  ctx.bezierCurveTo(50, 290, 250, 290, 290, 10);
+  // 描画する
+  ctx.strokeStyle = "#0000ff";
+  ctx.lineWidth = 7;
+  ctx.stroke();
+  // 制御点の描画
+  var r = 10;
+  ctx.fillStyle = "red";
+  circle(10, 10, r);
+  circle(50, 290, r);
+  circle(250, 290, r);
+  circle(290, 10, r);
+
+
+  function circle(x, y, r) {
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.fill();
+  }
+  function line(x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+  }
+</script>
+</body></html>

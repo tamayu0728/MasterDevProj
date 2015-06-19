@@ -1,0 +1,36 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+  <meta name="viewport" content="width=320, user-scalable=no" />
+  <title>ドローツール</title>
+  <style>
+    * { margin:0; padding:0; }
+    #a_canvas { width:320px; height:320px; }
+  </style>
+  <script type="text/javascript">
+    var ctx; 
+    function $ (id) { return document.getElementById(id); }
+    window.onload = function() {
+      // Canvasのコンテキストを取得する
+      ctx = $("a_canvas").getContext("2d");
+      ctx.fillStyle = "black";
+      // ユーザーのタッチイベントに反応する------(*1)
+      $("a_canvas").ontouchstart = drawMark;
+      $("a_canvas").ontouchmove  = drawMark;
+      $("a_canvas").ontouchend   = drawMark;
+    };
+    // イベントを処理して描画を行う-------------(*2)
+    function drawMark(event) {
+      event.preventDefault(); // --- (*3)
+      for (var i = 0; i < event.touches.length; i++) {
+        var t = event.touches[i];
+        var mx = t.pageX;
+        var my = t.pageY;
+        ctx.fillRect(mx, my, 10, 10);
+        $("xy").innerHTML = "xy=" + mx + "," + my;
+      }
+    }
+  </script>
+</head><body>
+  <canvas id="a_canvas" width="320" height="320"></canvas><br/>
+  <p id="xy"></p>
+</body></html>
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Camera App</title>
+</head><body>
+  <!-- PhoneGapのライブラリを取り込み --------(*1) -->
+  <script type="text/javascript" src="cordova.js"></script>
+  <!-- メイン画面 --------------------------(*2) -->
+  <h1>カメラアプリ</h1>
+  <div>
+    <button onclick="getFromBase64()">カメラで撮影(Base64)</button>
+    <button onclick="getFromURI()">カメラで撮影(URI)</button>
+    <button onclick="getFromLib()">アルバムから選択</button>
+  </div>
+  <div><img id="pic" style="width:100%"/></div>
+  <div id="info"></div>
+<!-- メインプログラム -->
+<script type="text/javascript">
+// カメラで撮影してBase64でデータを得る---------------(*4)
+function getFromBase64() {
+  var opt = {
+    quality : 75,
+    destinationType : Camera.DestinationType.DATA_URL,
+    sourceType : Camera.PictureSourceType.CAMERA
+  };
+  navigator.camera.getPicture(
+    cameraOnSuccess, onError, opt);
+}
+function cameraOnSuccess(base64data) { // --------(*5)
+  $("pic").src = "data:image/jpeg;base64," + base64data;
+}
+function onError(message) {
+  alert("[ERROR]" + message);
+}
+// カメラで撮影してURIでデータを得る -------------------(*6)
+function getFromURI() {
+  var opt = {
+    quality : 75,
+    destinationType : Camera.DestinationType.FILE_URL,
+    sourceType : Camera.PictureSourceType.CAMERA
+  };
+  navigator.camera.getPicture(
+    cameraURIOnSuccess, onError, opt);
+}
+function cameraURIOnSuccess(imageURI) {
+  $("pic").src = imageURI;
+  $("info").innerHTML = imageURI;
+}
+// アルバムから選択 -------------------------------(*7)
+function getFromLib() {
+  var opt = {
+    quality : 75,
+    destinationType : Camera.DestinationType.FILE_URL,
+    sourceType : Camera.PictureSourceType.PHOTOLIBRARY
+  };
+  navigator.camera.getPicture(
+    cameraURIOnSuccess, onError, opt);
+}
+// idの要素を取得
+function $(id) {
+  return document.getElementById(id);
+}
+</script>
+</body></html>

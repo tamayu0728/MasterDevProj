@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <title>タッチパズル</title>
+  <meta name="viewport" content="width=320"><!-- ---------(*1) -->
+  <script type="text/javascript" src="puzzle.js"></script>
+  <style>
+     * { margin:0; padding:0; text-align:center; }
+    h1 { padding:4px; font-size:12px; }
+    button { width:310px; padding:5px; }
+  </style>
+</head>
+<body>
+  <h1>タッチパズル/
+    <span id="score">隣り合うブロックを消そう!</span>
+  </h1>
+  <canvas id="main" width="320" height="320"></canvas>
+  <br><button onclick="newGame()">新規ゲーム</button>
+</body></html>
+

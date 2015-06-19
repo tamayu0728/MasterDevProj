@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>掲示板</title>
+  <style> 
+    h1,h2 { background-color: orange; }
+    h3 { border-bottom: 1px solid gray; }
+    article { border: 1px solid gray; padding:4px; margin:4px; }
+    .name { color: gray; }
+  </style>
+  <script type="text/javascript" src="bbs.js"></script>
+</head><body>
+  <!-- 掲示板の書込フォーム -------(*1) --->
+  <h1>掲示板</h1>
+  <div>
+    名前: <input id="name"><br>
+    件名: <input id="title"><br>
+    本文: <textarea id="body" rows="3"></textarea><br>
+    <button id="addButton">書込</button>
+  </div>
+  <!-- 記事一覧の表示部分 -------(*2) --->
+  <h2>記事一覧</h2>
+  <div id="log"></div>
+  <!-- 記事のテンプレート ------(*3) -->
+  <article id="template" style="display:none">
+    <h3><span class="title">TITLE</span>
+        <span class="name"></span></h3>
+    <p class="body">BODY</p>
+    <p style="text-align:right">
+      <button class="delButton">削除</button></p>
+  </article>
+</body></html>
+

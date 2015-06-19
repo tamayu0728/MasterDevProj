@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<meta name="viewport" content="width=320">
+<style>
+.layer {
+  /* 絶対座標を指定する */
+  position: absolute;
+  /* 背景を透明にする */
+  background-color: transparent;
+}
+</style>
+</head><body>
+<canvas id="c1" class="layer" width="300" height="300"></canvas>
+<canvas id="c2" class="layer" width="300" height="300"></canvas>
+<canvas id="c3" class="layer" width="300" height="300"></canvas>
+<script type="text/javascript">
+// <canvas>要素を取得
+var c1 = document.getElementById("c1");
+var c2 = document.getElementById("c2");
+var c3 = document.getElementById("c3");
+// 座標と重なり順を合わせる
+setLayer(c1, 10,10, 30);
+setLayer(c2, 10,10, 29);
+setLayer(c3, 10,10, 28);
+// 描画
+var ctx1 = c1.getContext("2d");
+var ctx2 = c2.getContext("2d");
+var ctx3 = c3.getContext("2d");
+circle(ctx1,  50, 150, 50, "red");
+circle(ctx2, 100, 100, 50, "green");
+circle(ctx3, 150, 150, 50, "blue");
+// 座標と重なり順を指定する
+function setLayer(obj, x, y, zIndex) {
+  obj.style.left = x;
+  obj.style.top  = y;
+  obj.style.zIndex = zIndex;
+}
+// 円を描画する
+function circle(ctx, x, y, r, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2*Math.PI);
+  ctx.fill();
+}
+</script>
+</body></html>
+

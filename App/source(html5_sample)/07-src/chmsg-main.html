@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=320">
+<style> body { background-color: #fff0f0; } </style>
+<script type="text/javascript">
+// (1) チャンネルメッセージの作成
+var ch = new MessageChannel();
+// onloadイベントでフレームにメッセージを送信
+window.onload = function () {
+  // フレームのオブジェクトを得る
+  var sub = document.getElementById("sub");
+  // メッセージとポートをサブページに送信
+  sub.contentWindow.postMessage(
+    "start", "/", [ch.port2]);
+};
+// (3) ランダムな数字を送信
+function hello() {
+  ch.port1.postMessage(Math.random());
+}
+// (6) 返信されたデータを画面に表示
+ch.port1.onmessage = function (e) {
+  var info = document.getElementById("info");
+  info.innerHTML += e.data + "<br>";
+};
+</script>
+</head><body>
+  <h1>チャンネルメッセージの送信</h1>
+  <p><button onclick="hello()">送信</button></p>
+  <!-- サブページ -->
+  <iframe id="sub" src="chmsg-sub.html" 
+   width="90%" height="200"></iframe>
+  <!-- サブページからの返信を表示する -->
+  <div id="info"></div>
+</body></html>
+

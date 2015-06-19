@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script type="text/javascript">
+    // オーディオプレイヤーのオブジェクトを作成
+    var audio = new Audio("test.mp3");
+    // 再生位置の監視
+    audio.addEventListener(
+      "timeupdate", updateHandler);
+    function updateHandler(e) {
+      $("info").innerHTML = 
+        audio.currentTime + "/" + 
+        audio.duration;
+      if (audio.currentTime >= audio.duration) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    }
+    // 音量を相対的に変更する
+    function changeVolume(v) {
+      var new_v = audio.volume + v;
+      if (0 <= new_v && new_v <= 1.0) {
+        audio.volume = new_v;
+      }
+    }
+    function volumeUp() {
+      changeVolume(0.2);
+    }
+    function volumeDown() {
+      changeVolume(-0.2);
+    }
+    function $(id) {
+      return document.getElementById(id);
+    }
+  </script>
+  <style> input { width:140px; } </style>
+</head><body>
+  <h3>オーディオプレイヤー</h3>
+  <div id="info"></div><br>
+  <div id="player_div">
+    Control:<br>
+    <input type="button" value="PLAY"
+        onclick="audio.play()">
+    <input type="button" value="STOP" 
+        onclick="audio.pause()">
+    <input type="button" value="先頭から再生"
+     onclick="audio.currentTime=0; audio.play()"><br>
+    Volume:<br>
+    <input type="button" value="- Down"
+     onclick="volumeDown()">
+    <input type="button" value="+ UP"
+     onclick="volumeUp()">
+  </div>
+</body></html>

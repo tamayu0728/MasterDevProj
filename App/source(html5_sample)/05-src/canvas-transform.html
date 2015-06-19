@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body>
+<!-- canvas の定義 -->
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  // canvas を取得
+  var canvas = document.getElementById("a_canvas");
+  // 描画用のコンテキストを取得
+  var ctx = canvas.getContext("2d");
+  // 描画処理
+  ctx.translate(150,150); // 中心点を移動させておく
+  // 12本の線を回転させて描画
+  var deg = 360 / 12;
+  for (var i = 0; i < 12; i++) {
+    ctx.save();
+    // 回転
+    var rad = (i * deg) * Math.PI / 180;
+    ctx.transform(
+      Math.cos(rad), Math.sin(rad), 
+      -Math.sin(rad), Math.cos(rad),
+      0, 0); 
+    // 細長い長方形を描画
+    ctx.fillStyle = "blue";
+    ctx.beginPath();
+    ctx.rect(0,0,150,10);
+    ctx.fill();
+    ctx.restore();
+  }
+</script>
+</body></html>
+

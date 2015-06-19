@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=320">
+</head><body>
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  // コンテキストを取得
+  var a_canvas = document.getElementById("a_canvas");
+  var context = a_canvas.getContext("2d");
+  // 円を描画
+  var x = 150;
+  var y = 150;
+  var r = 50;
+  // 青い円を描く
+  context.beginPath();
+  context.arc(x-r,y,r*2,0,2*Math.PI);
+  context.fillStyle = "rgba(0,0,255,0.7)";
+  context.fill();
+  // 赤い円を描く
+  context.beginPath();
+  context.arc(x+r,y,r*2,0,2*Math.PI);
+  context.fillStyle = "rgba(255,0,0,0.7)";
+  context.fill();
+</script>
+</body></html>

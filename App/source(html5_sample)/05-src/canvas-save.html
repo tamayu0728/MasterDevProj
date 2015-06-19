@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body>
+<!-- canvas の定義 -->
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  // canvas を取得
+  var canvas = document.getElementById("a_canvas");
+  // 描画用のコンテキストを取得
+  var ctx = canvas.getContext("2d");
+  // 塗色を変更して保存
+  ctx.fillStyle = "blue";
+  ctx.save(); // (a)
+  ctx.fillStyle = "red";
+  ctx.save(); // (b)
+  ctx.fillStyle = "green";
+  ctx.save(); // (c)
+  ctx.fillStyle = "black";
+  // 保存した内容を復元しながら描画
+  ctx.restore(); // 塗色が緑(c)
+  ctx.fillRect(0,0,100,100);
+  ctx.restore(); // 塗色が赤(b)
+  ctx.fillRect(100,100,100,100);
+  ctx.restore(); // 塗色が青(a)
+  ctx.fillRect(200,200,100,100);
+</script>
+</body></html>
+
+

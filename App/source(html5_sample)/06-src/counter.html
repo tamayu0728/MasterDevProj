@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=320">
+</head><body>
+<div>ページの表示回数:</div>
+<div id="counter_div"></div>
+<script type="text/javascript">
+  // localStorage のカウンタ値を加算する
+  if (localStorage.counter === undefined) {
+    localStorage.counter = 1;
+  } else {
+    localStorage.counter++;
+  }
+  // カウンタを表示する
+  var counter_div = document.getElementById("counter_div");
+  counter_div.innerText = localStorage.counter;
+</script>
+</body></html>
+

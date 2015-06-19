@@ -1,0 +1,20 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=320">
+<style> body { background-color: #fff0f0; } </style>
+<script type="text/javascript">
+  // メッセージをサブページへ送信する
+  function hello() {
+    // フレームを取得
+    var sub = document.getElementById("sub");
+    // フレームにメッセージを送信
+    sub.contentWindow.postMessage("Hello!", "/");
+  }
+</script>
+</head><body>
+  <h1>メッセージの送信</h1>
+  <p><button onclick="hello()">送信</button></p>
+  <iframe id="sub" src="webmsg-sub.html" 
+   width="90%" height="300"></iframe>
+</body></html>
+

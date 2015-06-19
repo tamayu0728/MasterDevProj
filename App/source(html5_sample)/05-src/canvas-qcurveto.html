@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=320">
+</head><body>
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  var canvas = document.getElementById("a_canvas");
+  var ctx = canvas.getContext("2d");
+  // --- 背景を塗りつぶす
+  ctx.fillStyle   = "#f0f0f0";
+  ctx.fillRect(0,0,300,300);
+  // --- 円弧を描く
+  // パスの指定
+  ctx.beginPath();
+  ctx.moveTo(10, 10);
+  ctx.quadraticCurveTo(150, 300, 290, 10);
+  // 描画する
+  ctx.strokeStyle = "#0000ff";
+  ctx.lineWidth = 7;
+  ctx.stroke();
+</script>
+</body></html>

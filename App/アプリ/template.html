@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>jQueryMobile</title>
+  <!-- jQueryの読み込み -->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <!-- jsとcssの読み込み -->
+  <script src="js/app.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+
+<body>
+  <!-- 推薦画面ホーム -->
+  <div data-role = "page" id="sugest">
+    <div data-role = "header" data-position="fixed">
+      <a href="#visual" data-role = "button" data-icon = "bars" class="ui-btn-right">メニュー</a>
+      <h1>生活支援システム</h1>
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#sugest" data-transition = "slide" class="ui-btn-active">推薦</a></li>
+          <li><a href="#visual" data-transition = "slide">可視化</a></li>
+          <li><a href="#menu" data-transition = "slide">???</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 推薦画面のコンテンツ -->
+    <div data-role = "content" id="genre">
+      <h1>ジャンル選択</h1>
+      <!-- レシピグループ -->
+      <div data-role="controlgroup">
+        <p  id="recipe_group"><img src="./images/recipe.jpg"></p>
+        <div id="recipe_group_content">
+          <div data-role="collapsible" id="carbohydrate">
+            <h2>炭水化物</h2>
+            <p>ここに実データを入れる</p>
+          </div>
+          <div data-role="collapsible" id="protein">
+            <h2>たんぱく質</h2>
+            <p>ここに実データを入れる</p>
+          </div>
+          <div data-role="collapsible" id="lipid">
+            <h2>脂質</h2>
+            <p>ここに実データを入れる</p>
+          </div>
+          <div data-role="collapsible" id="vitamin">
+            <h2>ビタミン</h2>
+            <p>ここに実データを入れる</p>
+          </div>
+          <div data-role="collapsible" id="mineral">
+            <h2>ミネラル</h2>
+            <p>ここに実データを入れる</p>
+          </div>
+        </div>
+      </div>
+      <!-- 運動グループ -->
+      <div data-role="controlgroup">
+        <p id="sports_group"><img src="./images/run.jpg"></p>
+        <div id="sports_group_content">
+          <div data-role="collapsible" id="hi_power">
+            <h2>ハイパワートレーニング</h2>
+            <p>ここに実データを入れる</p>
+          </div>
+          <div data-role="collapsible" id="middle_power">
+            <h2>ミドルパワートレーニング</h2>
+            <p>ここに実データを入れる</p>
+          </div>
+          <div data-role="collapsible" id="row_power">
+            <h2>ローパワートレーニング</h2>
+            <p>ここに実データを入れる</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-role = "footer" data-position="fixed">
+      <h4>copyrigth</h4>  
+    </div>
+  </div>
+
+  <!-- 可視化画面ホーム -->
+  <div data-role="page" id="visual" data-add-back-btn="true">
+    <div data-role = "header" data-position="fixed">
+      <a href="#visual" data-role = "button" data-icon = "bars" class="ui-btn-right">メニュー</a>
+      <h1>生活支援システム</h1>
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#sugest" data-transition = "slide">推薦</a></li>
+          <li><a href="#visual" data-transition = "slide" class="ui-btn-active">可視化</a></li>
+          <li><a href="#menu" data-transition = "slide">???</a></li>
+        </ul>
+      </div>
+    </div>
+    <div data-role = "content">
+      <p>いろいろ</p>
+      <p><a href="#sugest">ホーム</a></p>
+      <p><a href="#visual" data-role = "button" data-icon = "gear" data-inline = "true" data-transition = "slide">メニュー</a></p>
+      <div data-role = "footer">
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

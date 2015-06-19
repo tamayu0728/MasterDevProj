@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=320">
+<style> body { background-color: #fff0ff; } </style>
+<script type="text/javascript">
+  // ポート記録用
+  var port = null;
+  var num; // 番号記録用
+  // (2) ポートを受け取る
+  window.onmessage = function(e) {
+    console.log(e);
+    if (e.data == "start") {
+      port = e.ports[0]; // portを得る
+      // ポートに受信イベントを設定
+      port.onmessage = portOnMessage; 
+    } 
+  };
+  // (4) ポートからの受信イベントハンドラ
+  function portOnMessage(e) {
+    num = e.data;
+    var info = document.getElementById("info");
+    info.innerHTML += num + "<br>";
+  }
+  // (5) 返信ボタンを押した時
+  function hensin() {
+    if (port === null) return;
+    port.postMessage("最後の番号:" + num);
+  }
+</script>
+</head><body>
+  <h2>サブページ</h2>
+  <div id="info"></div>
+  <button onclick="hensin()">返信</button>
+</body></html>
+

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=320">
+</head><body>
+<!-- canvas の定義 -->
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  // (*1) Canvas を取得
+  var canvas = document.getElementById("a_canvas");
+  // (*2) 描画用のコンテキストを取得
+  var ctx = canvas.getContext("2d");
+  // (*3) 描画処理
+  ctx.fillStyle = "rgb(255,0,0)";
+  ctx.fillRect(50, 50, 200, 200);
+  ctx.fillStyle = "rgba(0,0,255,0.5)";
+  ctx.fillRect(100, 100, 200, 200);
+</script>
+</body></html>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=320">
+</head><body>
+<canvas id="canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  // (1)描画用のコンテキストを取得
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  // (2)星を描画
+  ctx.strokeStyle = "gray";
+  ctx.fillStyle = "yellow";
+  for (var y = 0; y < 5; y++) {
+    for (var x = 0; x < 5; x++) {
+      drawStar(x * 50 + 50, y * 50 + 50, 25);
+    }
+  }
+  // 星を一つ描画
+  function drawStar(cx, cy, r) {
+    var theta = Math.PI * 72 / 180;
+    var dx1 = r * Math.sin(theta);
+    var dx2 = r * Math.sin(2 * theta);
+    var dy1 = r * Math.cos(theta);
+    var dy2 = r * Math.cos(2 * theta);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy - r);
+    ctx.lineTo(cx - dx2, cy - dy2);
+    ctx.lineTo(cx + dx1, cy - dy1);
+    ctx.lineTo(cx - dx1, cy - dy1);
+    ctx.lineTo(cx + dx2, cy - dy2);
+    ctx.lineTo(cx, cy - r);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }
+</script>
+</body></html>
+

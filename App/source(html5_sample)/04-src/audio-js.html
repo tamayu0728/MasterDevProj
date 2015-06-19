@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head><body style="text-align:center;">
+  <h3>JSからオーディオ再生</h3>
+  <div id="player_div" style="border:1px solid gray;">
+    <input type="button" value="再生" onclick="audio_play()" />
+    <input type="button" value="停止" onclick="audio_pause()" />
+  </div>
+  <script type="text/javascript">
+    // Audio オブジェクトを作成する
+    var audio = new Audio("test.mp3");
+    // 再生ボタンを押した
+    function audio_play() {
+      audio.play();
+    }
+    // 停止ボタンを押した
+    function audio_pause() {
+      audio.pause();
+    }
+  </script>
+</body></html>
+

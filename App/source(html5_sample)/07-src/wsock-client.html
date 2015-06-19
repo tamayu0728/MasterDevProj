@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+<body><h1>WebSocketチャット</h1>
+<div>
+  名前: <input id="name" type="text"><br>
+  メッセージ: <input id="msg" type="text">
+  <button id="sendBtn">送信</button>
+</div><hr>
+<div id="output"></div>
+<script type="text/javascript">
+function $(id) {
+  return document.getElementById(id);
+}
+window.onload = function () {
+  // WebSocketサーバーに接続
+  var ws = new WebSocket("ws://localhost:8888");
+  // 接続開始したとき
+  ws.onopen = function() {
+    ws.send('入室');
+  };
+  // メッセージを受信したとき
+  ws.onmessage = function (e) {
+    var data = e.data;
+    showLog(data);
+  };
+  // 接続が切断されたとき
+  ws.onclose = function (e) {
+    showLog("切断");
+  };
+  // ボタンを押したときメッセージを送信
+  $("sendBtn").onclick = function () {
+    var s = $("name").value + ":" +
+            $("msg").value;
+    ws.send(s);
+    $("msg").value = "";
+  };
+};
+function showLog(data) {
+  $("output").innerHTML = 
+    data + "<br>" + $("output").innerHTML;
+}
+</script>
+</body>
+</html>
+

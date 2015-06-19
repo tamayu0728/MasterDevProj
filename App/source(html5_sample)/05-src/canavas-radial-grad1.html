@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body>
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  var canvas = document.getElementById("a_canvas");
+  var ctx = canvas.getContext("2d");
+  // 描画
+  var g = ctx.createRadialGradient(150,150,50, 150,150,100);
+  g.addColorStop(0.3,   "red");
+  g.addColorStop(0.7,   "yellow");  
+  g.addColorStop(1.0,   "blue");  
+  ctx.fillStyle = g;
+  ctx.fillRect(20,20,260,260);
+</script>
+</body></html>
+
+

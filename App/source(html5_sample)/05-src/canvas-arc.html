@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=320">
+</head><body>
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  var canvas = document.getElementById("a_canvas");
+  var ctx = canvas.getContext("2d");
+  // --- 四角を塗りつぶす
+  ctx.fillStyle   = "#f0f0f0";
+  ctx.fillRect(0, 0, 300, 300);
+  // --- 円弧を描く
+  // パスの指定
+  ctx.beginPath();
+  var startAngle = degToRad(40);
+  var endAngle   = degToRad(320);
+  ctx.arc(150,150,130,startAngle,endAngle,false);
+  // 描画する
+  ctx.strokeStyle = "#ff0000";
+  ctx.lineWidth = 20;
+  ctx.stroke();
+  // 度からラジアンに
+  function degToRad(n) {
+    return n * Math.PI / 180;
+  }
+</script>
+</body></html>
+

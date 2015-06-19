@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>郵便番号ローカル検索</title>
+</head><body>
+<h1>郵便番号検索</h1>
+<div id="info"></div>
+<div id="form">
+  都道府県入力:<input id="ken" value="東京都"><br>
+  市区町村入力:<input id="addr" value="新宿区">
+  <button onclick="searchAddr()">住所から検索</button><br>
+  郵便番号入力:<input id="zip" value="1600011"<br>
+  <button onclick="searchZip()">郵便番号から検索</button>
+  <hr>
+  結果:<br><ul id="result"></ul>
+</div>
+<script type="text/javascript">
+// 大域変数
+var DB_NAME = "zipcode.db";
+var DB_VER  = 1;
+var db; // IndexedDBのオブジェクト
+var loadCount = 0;
+// HTMLの初期化イベント
+window.onload = openDB;
+// データベースを非同期で開く
+function openDB() {
+  $("form").style.display = "none";
+  var req = indexedDB.open(DB_NAME, DB_VER);
+  req.onupgradeneeded = dbCreateHandler;
+  req.onerror = onError;
+  req.onsuccess = function (e) {
+    db = e.target.result;
+    checkInitDB();
+  };
+}
+// オブジェクトストアを作成する
+function dbCreateHandler(e) {
+  var db = e.target.result;
+  // 過去にオブジェクトストアを生成したことがあるか？
+  if (db.objectStoreNames.contains("zipList")) {
+    db.deleteObjectStore("zipList");
+    delete localStorage.zipListInited;
+  }
+  // オブジェクトストアの生成
+  var store = db.createObjectStore(
+    "zipList", { keyPath:"zip" });
+  // インデックスの作成
+  store.createIndex("kenIndex", "ken", {
+    unique:false,        // 同じ都道府県の住所があるのでfalse
+    multiEntry: false });// 複数の都道府県にまたがることがないのでfalse
+}
+// 初期化されているか調べて、JSONデータを読み込む
+function checkInitDB(){
+  if (localStorage.zipListInited) {
+    $("form").style.display = "block";
+    return;
+  }
+  $("info").innerHTML = "DB初期化中";
+  loadCount = 0;
+  for (var i = 0; i <= 45; i++) {
+    var url = "zip-converter/" + i + ".json";
+    httpGet(url, function(xhr, text) {
+      insertDB(JSON.parse(text));
+    }, onError);
+  }
+}
+// データストアにデータを挿入する
+function insertDB(data) {
+  console.log(data[0].zip);
+  $("info").innerHTML = "読込中:" + data[0].zip;
+  var trans = db.transaction(["zipList"], "readwrite");
+  var store = trans.objectStore("zipList");
+  trans.onerror = onError;
+  trans.oncomplete = function (e) {
+    console.log("inserted:" + loadCount);
+    loadCount++;
+    if (loadCount >= 46) {
+      $("info").innerHTML = "";
+      $("form").style.display = "block";
+      localStorage.zipListInited = "ok";
+    }
+  };
+  // データを挿入
+  for (var i = 0; i < data.length; i++) {
+    store.put(data[i]);
+  }
+}
+// 検索
+function searchAddr() { // 住所から検索
+  var ken  = $("ken").value;
+  var addr = $("addr").value;
+  if (ken == "") return;
+  var result_ul = $("result");
+  result_ul.innerHTML = "";
+  // まずは都道府県で絞り込み
+  var trans = db.transaction(["zipList"], "readonly");
+  var store = trans.objectStore("zipList");
+  var index = store.index("kenIndex");
+  var req = index.openCursor(ken, "next");
+  req.onerror = onError;
+  req.onsuccess = function (e) {
+    var cur = req.result;
+    console.log("cursor.onsuccess:",cur);
+    if (cur == null) return;
+    var row = cur.value;
+    // 市区町村でさらに絞り込み
+    if (row.addr.indexOf(addr) >= 0) { 
+      var li = document.createElement("li");
+      li.innerHTML = "〒" + row.zip + " " + row.addr;
+      result_ul.appendChild(li);
+    }
+    cur.continue();
+  };
+}
+function searchZip() { // 郵便番号から検索
+  var zip = $("zip").value;
+  if (zip == "") return;
+  var result_ul = $("result");
+  result_ul.innerHTML = "";
+  // 郵便番号で取得
+  var trans = db.transaction(["zipList"], "readonly");
+  var store = trans.objectStore("zipList");
+  var req = store.get(zip);
+  req.onerror = onError;
+  req.onsuccess = function (e) {
+    var v = e.target.result;
+    result_ul.innerHTML = "<li>〒" +
+      v.zip + " " + v.addr + "</li>";
+  };
+}
+function onError(e) {
+  console.log("error:", e);
+}
+function $(id) {
+  return document.getElementById(id);
+}
+// Ajaxを手軽に行なう関数を定義したもの
+function httpGet(url, onsuccess, onerror) {
+  // XMLHttpRequestのオブジェクトを作成
+  var xhr = new XMLHttpRequest();
+  // 非同期通信でURLをセット
+  xhr.open('GET', url, true);
+  // 通信状態が変化したときのイベント
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4) { //通信完了
+      if (xhr.status == 200) { //HTTPステータス200
+        onsuccess(xhr, xhr.responseText);
+      } else {
+        onerror("ErrorCode:"+xhr.status);
+      }
+    }
+  };
+  xhr.send(''); // 通信を開始
+  return xhr;
+}
+</script>
+</body></html>
+

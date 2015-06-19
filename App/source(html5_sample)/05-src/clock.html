@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body>
+<!-- canvas の定義 -->
+<canvas id="a_canvas" width="300" height="300"></canvas>
+<script type="text/javascript">
+  // canvas を取得
+  var canvas = document.getElementById("a_canvas");
+  // 描画用のコンテキストを取得
+  var ctx = canvas.getContext("2d");
+  // 定期的に時計を更新する 
+  setInterval(drawClock, 500);
+  // 時計の描画処理
+  function drawClock() {
+    // キャンバスをクリアする
+    ctx.clearRect(0, 0, 300, 300);
+    // 背景の円を描画
+    ctx.fillStyle = "black";
+    ctx.beginPath();
+    ctx.arc(150,150,145,0,2*Math.PI);
+    ctx.fill();
+    var t = new Date();
+    var hour = t.getHours() % 12;
+    var min  = t.getMinutes();
+    var sec  = t.getSeconds();
+    drawLine(hour / 12 * 360,  70, 15);
+    drawLine(min  / 60 * 360, 110, 8);
+    drawLine(sec  / 60 * 360, 140, 2);
+  }
+  // 線を描画する
+  function drawLine(deg, width, height) {
+    ctx.save();
+    ctx.translate(150, 150); // 中心点に移動
+    deg -= 90;
+    var rad = deg * Math.PI / 180;
+    ctx.rotate(rad);
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, width, height);
+    ctx.restore();
+  }
+</script>
+</body></html>
+
+
+

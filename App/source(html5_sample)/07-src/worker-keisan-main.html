@@ -1,0 +1,17 @@
+<!DOCTYPE html><html><head>
+<meta charset="utf-8">
+<title>計算テスト</title>
+</head><body>
+<script type="text/javascript">
+// ワーカーを作成--------(*1)
+var w = new Worker("worker-keisan-task.js");
+// メッセージを受信したとき------(*2)
+w.onmessage = function(e) {
+  var data = e.data; //----------(*3)
+  alert("答え=" + data.result);
+};
+// ワーカーに30*5を計算するよう送信---(*4)
+w.postMessage({a:30, b:5});
+</script></body></html>
+
+

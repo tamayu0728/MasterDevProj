@@ -1,0 +1,43 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>jQuery Mobile Template</title>
+  <!-- jQuery Mobileのライブラリ取込 -->
+  <link rel="stylesheet"
+    href="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.css" />
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script>
+</head><body>
+
+<!-- メインページ -->
+<div data-role="page" id="mainPage">
+  <div data-role="header"
+       data-add-back-btn="true"
+       data-back-btn-text="戻る">
+    <h1>メインページ</h1>
+    <a href="#aboutPage" class="ui-btn ui-btn-a ui-btn-right">About</a>
+  </div>
+  <div role="main" class="ui-content">
+    <p>これはメインページのコンテンツです。</p>
+  </div>
+  <div data-role="footer">
+    <h4>ページフッター</h4>
+  </div>
+</div><!-- /page -->
+
+<!-- Aboutページ -->
+<div data-role="page" id="aboutPage">
+  <div data-role="header"
+       data-add-back-btn="true"
+       data-back-btn-text="戻る">
+    <h1>サブページ</h1>
+  </div>
+  <div role="main" class="ui-content">
+    <p>これはAboutページのコンテンツです。</p>
+  </div>
+  <div data-role="footer">
+    <h4>ページフッター</h4>
+  </div>
+</div><!-- /page -->
+
+</body></html>

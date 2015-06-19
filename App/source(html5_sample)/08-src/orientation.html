@@ -1,0 +1,24 @@
+<!DOCTYPE html><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<style>div{font-size:48px;}</style>
+<h1>端末の向き</h1>
+<div id="info"></div>
+<script type="text/javascript">
+  // 端末向きの検出イベントを設定
+  window.onorientationchange = onchange;
+  screen.onorientationchange = onchange;
+  // デバイスの向きが変わった時に行う処理
+  function onchange(e) {
+    var ori = "unknown";
+    if (typeof(window.orientation) != "undefined") {
+      ori = window.orientation;
+    }
+    else if (typeof(screen.orientation) != "undefined") {
+      ori = screen.orientation;
+    }
+    var i = document.getElementById("info");
+    i.innerHTML = "orientation=" + ori;
+  }
+  onchange(); 
+</script>
+
