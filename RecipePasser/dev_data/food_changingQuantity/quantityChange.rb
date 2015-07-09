@@ -7,6 +7,7 @@ File.open("/Users/tamada/Desktop/修論Dev/RecipePasser/dev_data/food_changingQu
 		foodArray = Array.new	#元データの配列
 		foodArray = recipeLine.split(",")
 		foodArray[2].chomp!	#改行コードの削除
+		p(foodArray)
 		if !recipeLine.include?("g")
 			# sta_food1.txtの捜査
 			File.open("/Users/tamada/Desktop/修論Dev/RecipePasser/dev_data/food_changingQuantity/changeDataFile/sta_food1.txt") do |changeFile|
