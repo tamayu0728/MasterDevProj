@@ -69,7 +69,7 @@ File.open("/Users/tamada/MasterDevProj/RecipePasser/release_data/recipe_name.txt
 	file.each_line do |recipeLine|
 		recipeArray = Array.new
 		recipeArray = recipeLine.split(",")
-		p(recipeArray)
+		# p(recipeArray)
 		dataArray.each do |dataLine|
 			arr = Array.new
 			arr = dataLine.split(",")
@@ -77,9 +77,10 @@ File.open("/Users/tamada/MasterDevProj/RecipePasser/release_data/recipe_name.txt
 				avg = 0
 				str = arr[1]
 				avg = arr[2].to_f / recipeArray[3].to_f
-				p(dataArray.find_index(dataLine))
+				# p(dataArray.find_index(dataLine))
 				dataArray.delete_at(dataArray.find_index(dataLine))
 				if avg > 1.0
+					p(avg)
 					avg = 1.0 / avg
 				end
 				if avg <= 0.2
